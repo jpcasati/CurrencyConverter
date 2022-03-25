@@ -17,6 +17,11 @@ public class MoneyBean {
     
     private double conversion;
 
+    @Override
+    public String toString() {
+        return "MoneyBean{" + "currencyCode=" + currencyCode + ", amount=" + amount + ", conversion=" + conversion + '}';
+    }
+
     public String getCurrencyCode() {
         return currencyCode;
     }

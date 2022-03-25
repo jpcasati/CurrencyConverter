@@ -17,6 +17,11 @@ public class RecordBean {
     
     double buyPerCAD;
 
+    @Override
+    public String toString() {
+        return "RecordBean{" + "currencyCode=" + currencyCode + ", sellPerCAD=" + sellPerCAD + ", buyPerCAD=" + buyPerCAD + '}';
+    }
+
     public String getCurrencyCode() {
         return currencyCode;
     }

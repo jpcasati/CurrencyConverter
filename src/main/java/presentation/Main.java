@@ -6,6 +6,13 @@
 package presentation;
 
 import bean.MoneyBean;
+import bean.RecordBean;
+import business.Conversion;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import persistance.CurrencyDAO;
+import persistance.CurrencyDAOImpl;
 
 /**
  *
@@ -61,8 +68,18 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton2.setText("Sell");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Exit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,7 +150,36 @@ public class Main extends javax.swing.JFrame {
         
         System.out.println(moneyBean);
         
+        moneyBean = new Conversion().buyConversion(moneyBean);
+                
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        txtValue.setText(dc.format(moneyBean.getConversion()));
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        moneyBean = new MoneyBean();
+        
+        moneyBean.setCurrencyCode(txtCode.getText());
+        
+        moneyBean.setAmount(Double.parseDouble(txtAmount.getText()));
+        
+        System.out.println(moneyBean);
+        
+        moneyBean = new Conversion().sellConversion(moneyBean);
+                
+        DecimalFormat dc = new DecimalFormat("0.00");
+        
+        txtValue.setText(dc.format(moneyBean.getConversion()));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
